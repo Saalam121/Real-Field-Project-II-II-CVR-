@@ -1,7 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.utl.*;
 
 public class FoodOrderingSystem extends JFrame implements ActionListener {
     JLabel textHeader, Description;
@@ -10,16 +9,11 @@ public class FoodOrderingSystem extends JFrame implements ActionListener {
     JButton b;
 
     FoodOrderingSystem() {
-
         textHeader = new JLabel("FOOD ORDERING");
-        textHeader.setBounds(50, 50, 500, 30);
-        textHeader.setBackground(Color.BLUE);
         textHeader.setFont(new Font("Times New Roman", Font.PLAIN, 35));
 
         Description = new JLabel();
         Description.setText("Prepared by Saalam");
-        Description.setBounds(20, 500, 500, 30);
-        Description.setBackground(Color.BLUE);
         Description.setFont(new Font("Times New Roman", Font.PLAIN, 15));
 
         riceBeans = new JCheckBox("Rice @ 60");
@@ -44,25 +38,34 @@ public class FoodOrderingSystem extends JFrame implements ActionListener {
         mandazi.setFont(new Font("Arial", Font.PLAIN, 20));
 
         b = new JButton("ORDER");
-        b.setBounds(100, 400, 150, 50);
-        b.setFont(new Font("Arial", Font.PLAIN, 30));
-        b.setForeground(Color.white);
-        b.setBackground(Color.darkGray);
         b.addActionListener(this);
 
-        add(textHeader);
-        add(riceBeans);
-        add(chapati);
-        add(tea);
-        add(b);
-        add(chips);
-        add(stew);
-        add(mandazi);
-        add(Description);
+        Container container = getContentPane();
+        container.setLayout(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.insets = new Insets(5, 5, 5, 5);
+        gbc.gridwidth = GridBagConstraints.REMAINDER;
+        gbc.anchor = GridBagConstraints.WEST;
+
+        container.add(textHeader, gbc);
+        container.add(riceBeans, gbc);
+        container.add(chapati, gbc);
+        container.add(tea, gbc);
+        container.add(chips, gbc);
+        container.add(stew, gbc);
+        container.add(mandazi, gbc);
+        container.add(b, gbc);
+
+        // Create another set of constraints for the description label
+        GridBagConstraints gbcDesc = new GridBagConstraints();
+        gbcDesc.anchor = GridBagConstraints.SOUTHEAST; // Anchor to bottom right corner
+        gbcDesc.insets = new Insets(5, 5, 5, 5);
+        container.add(Description, gbcDesc); // Add description label with new constraints
+
         setSize(500, 600);
-        setLayout(null);
-        setVisible(true);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        setLocationRelativeTo(null);
+        setVisible(true);
     }
 
     @Override
