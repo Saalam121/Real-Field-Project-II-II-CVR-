@@ -10,7 +10,7 @@ public class LoginPage extends JFrame implements ActionListener {
     public LoginPage() {
         setTitle("Login Page");
         setSize(300, 150);
-        setResizable(false); // Disable resizing
+        setResizable(false); 
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
@@ -29,7 +29,7 @@ public class LoginPage extends JFrame implements ActionListener {
         panel.add(usernameField);
         panel.add(passwordLabel);
         panel.add(passwordField);
-        panel.add(new JLabel()); // Empty label for layout
+        panel.add(new JLabel()); 
         panel.add(loginButton);
 
         add(panel);
@@ -42,7 +42,7 @@ public class LoginPage extends JFrame implements ActionListener {
             String username = usernameField.getText();
             String password = new String(passwordField.getPassword());
 
-            // Check username and password (dummy check, replace with your logic)
+            
             if (username.equals("admin") && password.equals("password")) {
                 JOptionPane.showMessageDialog(this, "Login Successful");
             } else {
