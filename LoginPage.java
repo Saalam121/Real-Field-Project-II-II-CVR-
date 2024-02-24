@@ -50,14 +50,21 @@ public class LoginPage extends JFrame implements ActionListener {
         setVisible(true);
     }
 
-    public void actionPerformed(ActionEvent e) {
-        String username = usernameField.getText();
-        String password = new String(passwordField.getPassword());
+     public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == loginButton) {
+            String username = usernameField.getText();
+            String password = new String(passwordField.getPassword());
 
-        if (username.equals("admin") && password.equals("password")) {
-            JOptionPane.showMessageDialog(this, "Login Successful!");
-        } else {
-            JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
+            // Check username and password (dummy check, replace with your logic)
+            if (username.equals("saalam") && password.equals("password")) {
+                JOptionPane.showMessageDialog(this, "Login Successful");
+
+                // Open the FoodOrderingSystem window
+                new FoodOrderingSystem();
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
+            }
         }
     }
 
