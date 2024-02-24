@@ -57,7 +57,7 @@ public class LoginPage extends JFrame implements ActionListener {
 
             // Check username and password (dummy check, replace with your logic)
             if (username.equals("saalam") && password.equals("password")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
+                //JOptionPane.showMessageDialog(this, "Login Successful");
 
                 // Open the FoodOrderingSystem window
                 new FoodOrderingSystem();
