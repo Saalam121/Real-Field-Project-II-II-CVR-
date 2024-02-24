@@ -8,54 +8,60 @@ public class LoginPage extends JFrame implements ActionListener {
     private JButton loginButton;
 
     public LoginPage() {
-        setTitle("Login Page");
-        setSize(300, 150);
-        setResizable(false); // Disable resizing
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setLocationRelativeTo(null);
+        setTitle("Login");
+        setExtendedState(JFrame.MAXIMIZED_BOTH); // Maximizing the window
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new GridLayout(3, 2));
+        JPanel panel = new JPanel(new GridBagLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.anchor = GridBagConstraints.CENTER;
+        gbc.insets = new Insets(5, 5, 5, 5);
 
         JLabel usernameLabel = new JLabel("Username:");
-        usernameField = new JTextField();
         JLabel passwordLabel = new JLabel("Password:");
-        passwordField = new JPasswordField();
+        usernameField = new JTextField(30);
+        passwordField = new JPasswordField(20);
+        usernameLabel.setFont(new Font("ARIAL", Font.PLAIN, 30));
+        passwordLabel.setFont(new Font("ARIAL", Font.PLAIN, 30));
         loginButton = new JButton("Login");
-
         loginButton.addActionListener(this);
 
-        panel.add(usernameLabel);
-        panel.add(usernameField);
-        panel.add(passwordLabel);
-        panel.add(passwordField);
-        panel.add(new JLabel());
-        panel.add(loginButton);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        panel.add(usernameLabel, gbc);
+
+        gbc.gridx = 1;
+        panel.add(usernameField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        panel.add(passwordLabel, gbc);
+
+        gbc.gridx = 1;
+        panel.add(passwordField, gbc);
+
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        gbc.gridwidth = 2;
+        gbc.anchor = GridBagConstraints.CENTER;
+        panel.add(loginButton, gbc);
 
         add(panel);
         setVisible(true);
     }
 
-    @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton) {
-            String username = usernameField.getText();
-            String password = new String(passwordField.getPassword());
+        String username = usernameField.getText();
+        String password = new String(passwordField.getPassword());
 
-            // Check username and password (dummy check, replace with your logic)
-            if (username.equals("saalam") && password.equals("password")) {
-                JOptionPane.showMessageDialog(this, "Login Successful");
-
-                // Open the FoodOrderingSystem window
-                new FoodOrderingSystem();
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(this, "Invalid Username or Password");
-            }
+        if (username.equals("admin") && password.equals("password")) {
+            JOptionPane.showMessageDialog(this, "Login Successful!");
+        } else {
+            JOptionPane.showMessageDialog(this, "Invalid username or password. Please try again.");
         }
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(LoginPage::new);
+        new LoginPage();
     }
 }
