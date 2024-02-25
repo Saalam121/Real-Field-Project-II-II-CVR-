@@ -1,4 +1,5 @@
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicSpinnerUI;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -31,6 +32,27 @@ public class FoodOrderingSystem extends JFrame implements ActionListener {
         stewSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 10, 1));
         mandaziSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 10, 1));
 
+        // Set custom UI for spinner
+        for (JSpinner spinner : new JSpinner[]{riceBeansSpinner, chapatiSpinner, teaSpinner, chipsSpinner, stewSpinner, mandaziSpinner}) {
+            spinner.setUI(new BasicSpinnerUI() {
+                protected Component createNextButton() {
+                    JButton button = new JButton("+");
+                    button.setFocusable(false);
+                    button.setBorder(BorderFactory.createEmptyBorder());
+                    button.addActionListener(e -> spinner.setValue((int) spinner.getValue() + 1)); // Increment value
+                    return button;
+                }
+
+                protected Component createPreviousButton() {
+                    JButton button = new JButton("-");
+                    button.setFocusable(false);
+                    button.setBorder(BorderFactory.createEmptyBorder());
+                    button.addActionListener(e -> spinner.setValue((int) spinner.getValue() - 1)); // Decrement value
+                    return button;
+                }
+            });
+        }
+
         b = new JButton("ORDER");
         b.addActionListener(this);
 
@@ -53,13 +75,6 @@ public class FoodOrderingSystem extends JFrame implements ActionListener {
 
         container.add(b, gbc);
 
-        riceBeans.setBounds(100, 100, 100, 10);
-        chapati.setBounds(100, 150, 100, 10);
-        tea.setBounds(100, 200, 100, 10);
-        chips.setBounds(100, 250, 100, 10);
-        stew.setBounds(100, 300, 100, 10);
-        mandazi.setBounds(100, 350, 100, 10);
-
         riceBeans.setFont(new Font("Arial", Font.PLAIN, 20));
         chapati.setFont(new Font("Arial", Font.PLAIN, 20));
         tea.setFont(new Font("Arial", Font.PLAIN, 20));
@@ -80,28 +95,19 @@ public class FoodOrderingSystem extends JFrame implements ActionListener {
     }
 
     // Helper method to add checkbox and spinner with proper alignment
-    /*private void addCheckboxWithSpinner(Container container, GridBagConstraints gbc, JCheckBox checkBox, JSpinner spinner) {
-        container.add(checkBox, gbc);
-        gbc.anchor = GridBagConstraints.EAST; // Align spinner to the right
-        container.add(spinner, gbc);
-        gbc.anchor = GridBagConstraints.WEST; // Reset anchor
-    }*/
     private void addCheckboxWithSpinner(Container container, GridBagConstraints gbc, JCheckBox checkBox, JSpinner spinner) {
-    container.add(checkBox, gbc);
+        container.add(checkBox, gbc);
 
-    // Create a new instance of GridBagConstraints for the spinner
-    GridBagConstraints spinnerGBC = (GridBagConstraints) gbc.clone();
-    spinnerGBC.anchor = GridBagConstraints.EAST;
-    spinnerGBC.insets = new Insets(0, 10, 0, 0); // Add padding to the left to separate checkbox and spinner
+        // Create a new instance of GridBagConstraints for the spinner
+        GridBagConstraints spinnerGBC = (GridBagConstraints) gbc.clone();
+        spinnerGBC.anchor = GridBagConstraints.EAST;
+        spinnerGBC.insets = new Insets(-32, 10, 20, 0); // Add padding to the left to separate checkbox and spinner
 
-    // Add an empty border to move the spinner slightly upwards
-    spinner.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0)); // Adjust the top padding as needed
+        // Add an empty border to move the spinner slightly upwards
+        spinner.setBorder(BorderFactory.createEmptyBorder(1, 0, 0, 0)); // Adjust the top padding as needed
 
-    container.add(spinner, spinnerGBC);
-}
-
-
-
+        container.add(spinner, spinnerGBC);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
