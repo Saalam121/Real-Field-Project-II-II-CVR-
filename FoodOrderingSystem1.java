@@ -79,7 +79,7 @@ public class FoodOrderingSystem1 extends JFrame implements ActionListener {
         // Create a new instance of GridBagConstraints for the spinner
         GridBagConstraints spinnerGBC = (GridBagConstraints) gbc.clone();
         spinnerGBC.anchor = GridBagConstraints.EAST;
-        spinnerGBC.insets = new Insets(-30, 5, 10, 0); // Move the spinner 10 pixels upwards
+        spinnerGBC.insets = new Insets(-30, 5, 25, 0); // Move the spinner 10 pixels upwards
 
         // Add an empty border to move the spinner slightly upwards
         spinner.setBorder(BorderFactory.createEmptyBorder(5, 0, 0, 0)); // Adjust the top padding as needed
@@ -122,8 +122,17 @@ public class FoodOrderingSystem1 extends JFrame implements ActionListener {
             msg += "Mandazi: " + quantity + " @ 15\n";
         }
         msg += "_____________\n";
-        JOptionPane.showMessageDialog(this,
-                "RECEIPT\n\n" + msg + "Total = " + amount + "\n\n CONTACT: saalam121@gmail.com");
+        if (amount != 0) {
+            JOptionPane.showMessageDialog(this,
+                    "RECEIPT\n\n" + msg + "Total = " + amount + "\n\n CONTACT: saalam121@gmail.com");
+        } else {
+            // JOptionPane.showMessageDialog(this, "Please select any item !",
+            // "Error", JOptionPane.ERROR_MESSAGE);
+            String[] buttons = { "Go back" };
+
+            JOptionPane.showOptionDialog(null, "Please select any item", "Error",
+                    JOptionPane.WARNING_MESSAGE, 0, null, buttons, buttons[0]);
+        }
     }
 
     public static void main(String[] args) {
