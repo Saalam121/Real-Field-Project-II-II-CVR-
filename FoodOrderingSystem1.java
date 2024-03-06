@@ -123,11 +123,23 @@ public class FoodOrderingSystem1 extends JFrame implements ActionListener {
         }
         msg += "_____________\n";
         if (amount != 0) {
-            JOptionPane.showMessageDialog(this,
-                    "RECEIPT\n\n" + msg + "Total = " + amount + "\n\n CONTACT: saalam121@gmail.com");
+
+            JFrame frame = new JFrame();
+
+            JOptionPane optionPane = new JOptionPane("RECEIPT\n\n" + msg + "Total = " + amount +
+                    "\n\n CONTACT: saalam121@gmail.com", JOptionPane.PLAIN_MESSAGE);
+            JButton proceedButton = new JButton("Proceed to pay " + amount);
+            proceedButton.addActionListener(e1 -> {
+                optionPane.setValue(JOptionPane.OK_OPTION);
+                // Open payment window when the "Proceed" button is clicked
+                new PaymentWindow();
+            });
+            optionPane.setOptions(new Object[] { proceedButton });
+
+            JDialog dialog = optionPane.createDialog(frame, "Receipt Dialog");
+            dialog.setVisible(true);
         } else {
-            // JOptionPane.showMessageDialog(this, "Please select any item !",
-            // "Error", JOptionPane.ERROR_MESSAGE);
+
             String[] buttons = { "Go back" };
 
             JOptionPane.showOptionDialog(null, "Please select any item", "Error",
