@@ -1,6 +1,8 @@
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Random;
+import java.util.*;
 
 public class FoodOrderingSystem1 extends JFrame implements ActionListener {
     JLabel textHeader, Description;
@@ -20,8 +22,8 @@ public class FoodOrderingSystem1 extends JFrame implements ActionListener {
         MealsLabel = new JLabel("Meals @ 60");
         chapatiLabel = new JLabel("Chapati @ 40");
         teaLabel = new JLabel("Tea @ 10");
-        Fried_riceLabel = new JLabel("Fried_rice @ 100");
-        DrinksLabel = new JLabel("Drinks @ 80");
+        Fried_riceLabel = new JLabel("Fried_rice @ 70");
+        DrinksLabel = new JLabel("Drinks @ 20");
         mandaziLabel = new JLabel("Mandazi @ 15");
 
         MealsSpinner = new JSpinner(new SpinnerNumberModel(0, 0, 10, 1));
@@ -91,42 +93,49 @@ public class FoodOrderingSystem1 extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         float amount = 0;
         String msg = "";
+        float n=0;
         if (((int) MealsSpinner.getValue()) > 0) {
             int quantity = (int) MealsSpinner.getValue();
+            n=60*quantity;
             amount += 60 * quantity;
-            msg = "Rice: " + quantity + " @ 60\n";
+            msg = "Meals        : " + quantity +" x 60 => "+n+"\n";
         }
         if (((int) chapatiSpinner.getValue()) > 0) {
             int quantity = (int) chapatiSpinner.getValue();
-            amount += 20 * quantity;
-            msg += "Chapati: " + quantity + " @ 20\n";
+            n=40*quantity;
+            amount += 40 * quantity;
+            msg += "Chapati    : " + quantity +" x 40 => "+n+"\n";
         }
         if (((int) teaSpinner.getValue()) > 0) {
             int quantity = (int) teaSpinner.getValue();
+            n=10*quantity;
             amount += 10 * quantity;
-            msg += "Tea: " + quantity + " @ 10\n";
+            msg += "Tea           : " + quantity + " x 10 => "+n+"\n";
         }
         if (((int) Fried_riceSpinner.getValue()) > 0) {
             int quantity = (int) Fried_riceSpinner.getValue();
-            amount += 100 * quantity;
-            msg += "Fried_rice: " + quantity + " @ 100\n";
+            amount += 70 * quantity;
+            msg += "FriedRice : " + quantity +" x 70 => "+n+"\n";
         }
         if (((int) DrinksSpinner.getValue()) > 0) {
             int quantity = (int) DrinksSpinner.getValue();
-            amount += 80 * quantity;
-            msg += "Drinks: " + quantity + " @ 80\n";
+            n=20*quantity;
+            amount += 20 * quantity;
+            msg += "Drinks      : " + quantity +" x 20 => "+n+"\n";
         }
         if (((int) mandaziSpinner.getValue()) > 0) {
             int quantity = (int) mandaziSpinner.getValue();
+            n=15*quantity;
             amount += 15 * quantity;
-            msg += "Mandazi: " + quantity + " @ 15\n";
+            msg += "Mandazi   : " + quantity +" x 15 => "+n+"\n";
         }
         msg += "_____________\n";
         if (amount != 0) {
 
             JFrame frame = new JFrame();
-
-            JOptionPane optionPane = new JOptionPane("RECEIPT\n\n" + msg + "Total = " + amount +
+            Random rand = new Random();
+            int randomNumber = rand.nextInt(10) + 1;
+            JOptionPane optionPane = new JOptionPane("RECEIPT\n\n" +"Token Number: "+randomNumber+"\n\n"+ msg + "Total = " + amount +
                     "\n\n CONTACT: saalam121@gmail.com", JOptionPane.PLAIN_MESSAGE);
             JButton proceedButton = new JButton("Proceed to pay " + amount);
             proceedButton.addActionListener(e1 -> {
