@@ -93,60 +93,72 @@ public class FoodOrderingSystem1 extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         float amount = 0;
         String msg = "";
-        float n=0;
+        float n = 0;
         if (((int) MealsSpinner.getValue()) > 0) {
             int quantity = (int) MealsSpinner.getValue();
-            n=60*quantity;
+            n = 60 * quantity;
             amount += 60 * quantity;
-            msg = "Meals        : " + quantity +" x 60 => "+n+"\n";
+            msg = "Meals        : " + quantity + " x 60 => " + n + "\n";
         }
         if (((int) chapatiSpinner.getValue()) > 0) {
             int quantity = (int) chapatiSpinner.getValue();
-            n=40*quantity;
+            n = 40 * quantity;
             amount += 40 * quantity;
-            msg += "Chapati    : " + quantity +" x 40 => "+n+"\n";
+            msg += "Chapati    : " + quantity + " x 40 => " + n + "\n";
         }
         if (((int) teaSpinner.getValue()) > 0) {
             int quantity = (int) teaSpinner.getValue();
-            n=10*quantity;
+            n = 10 * quantity;
             amount += 10 * quantity;
-            msg += "Tea           : " + quantity + " x 10 => "+n+"\n";
+            msg += "Tea           : " + quantity + " x 10 => " + n + "\n";
         }
         if (((int) Fried_riceSpinner.getValue()) > 0) {
             int quantity = (int) Fried_riceSpinner.getValue();
             amount += 70 * quantity;
-            msg += "FriedRice : " + quantity +" x 70 => "+n+"\n";
+            msg += "FriedRice : " + quantity + " x 70 => " + n + "\n";
         }
         if (((int) DrinksSpinner.getValue()) > 0) {
             int quantity = (int) DrinksSpinner.getValue();
-            n=20*quantity;
+            n = 20 * quantity;
             amount += 20 * quantity;
-            msg += "Drinks      : " + quantity +" x 20 => "+n+"\n";
+            msg += "Drinks      : " + quantity + " x 20 => " + n + "\n";
         }
         if (((int) mandaziSpinner.getValue()) > 0) {
             int quantity = (int) mandaziSpinner.getValue();
-            n=15*quantity;
+            n = 15 * quantity;
             amount += 15 * quantity;
-            msg += "Mandazi   : " + quantity +" x 15 => "+n+"\n";
+            msg += "Mandazi   : " + quantity + " x 15 => " + n + "\n";
         }
         msg += "_____________\n";
         if (amount != 0) {
-
             JFrame frame = new JFrame();
             Random rand = new Random();
             int randomNumber = rand.nextInt(10) + 1;
-            JOptionPane optionPane = new JOptionPane("RECEIPT\n\n" +"Token Number: "+randomNumber+"\n\n"+ msg + "Total = " + amount +
-                    "\n\n CONTACT: saalam121@gmail.com", JOptionPane.PLAIN_MESSAGE);
+
+            // Define a custom font with increased size
+            Font font = new Font("Arial", Font.PLAIN, 20); // Adjust the font size as needed
+
+            // Create the JOptionPane with the custom font
+            JOptionPane optionPane = new JOptionPane(
+                    "RECEIPT\n\n" + "Token Number: " + randomNumber + "\n\n" + msg + "Total = " + amount +
+                            "\n\n CONTACT: saalam121@gmail.com",
+                    JOptionPane.PLAIN_MESSAGE);
+            optionPane.setFont(font); // Set font for the message
+
+            // Create the "Proceed" button with the custom font
             JButton proceedButton = new JButton("Proceed to pay " + amount);
+            proceedButton.setFont(font); // Set font for the button
             proceedButton.addActionListener(e1 -> {
                 optionPane.setValue(JOptionPane.OK_OPTION);
                 // Open payment window when the "Proceed" button is clicked
-                //new PaymentWindow();
+                new PaymentWindow();
             });
+
             optionPane.setOptions(new Object[] { proceedButton });
 
             JDialog dialog = optionPane.createDialog(frame, "Receipt Dialog");
             dialog.setVisible(true);
+
         } else {
 
             String[] buttons = { "Go back" };
