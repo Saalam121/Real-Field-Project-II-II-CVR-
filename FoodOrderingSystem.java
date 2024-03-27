@@ -140,7 +140,7 @@ public class FoodOrderingSystem extends JFrame implements ActionListener {
         }
         msg += "_____________\n";
         JOptionPane.showMessageDialog(this,
-                "RECEIPT\n\n" + msg + "Total = " + amount + "\n\n CONTACT: saalam121@gmail.com");
+                "Bill\n\n" + msg + "Total = " + amount + "\n\n CONTACT: saalam121@gmail.com");
     }
 
     public static void main(String[] args) {
